@@ -6,7 +6,12 @@ export default class GameScene extends Scene {
         super({ key: 'GameScene' });
     }
 
-    preload() {}
+    preload() {
+        this.load.spritesheet('char_attack_down-ss', 'assets/hero/char_attack_down_anim_strip_6.png', { frameWidth: 48, frameHeight: 32 });
+        this.load.spritesheet('char_attack_right-ss', 'assets/hero/char_attack_right_anim_strip_6.png', { frameWidth: 48, frameHeight: 32 });
+        this.load.spritesheet('char_attack_left-ss', 'assets/hero/char_attack_left_anim_strip_6.png', { frameWidth: 32, frameHeight: 48 });
+        this.load.spritesheet('char_attack_right-ss', 'assets/hero/char_attack_right_anim_strip_6.png', { frameWidth: 32, frameHeight: 48 });
+    }
 
     create() {
         this.cameras.main.fadeIn(1000);
