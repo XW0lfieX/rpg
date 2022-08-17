@@ -5,7 +5,7 @@ import MenuScene from './scenes/menuScene';
 
 export const phaserConfiguration = {
     type: Phaser.AUTO,
-    backgroundColor: '#008080',
+    backgroundColor: '#000000',
     scale: {
         parent: 'phaser-game',
         mode: Phaser.Scale.FIT,
