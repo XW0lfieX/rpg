@@ -4,7 +4,7 @@ enum HeroPosition {
     WEST,
     EAST,
     NORTH,
-    SOUTH
+    SOUTH 
 }
 enum HeroState {
     IDLE,
