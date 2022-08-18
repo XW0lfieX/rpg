@@ -18,7 +18,6 @@ export default class Hero extends Phaser.GameObjects.Sprite {
     keyRight: Phaser.Input.Keyboard.Key;
     keyUp: Phaser.Input.Keyboard.Key;
     keyDown: Phaser.Input.Keyboard.Key;
-    keyFire: Phaser.Input.Keyboard.Key;
 
     heroState: HeroState = HeroState.IDLE;
     heroPosition: HeroPosition = HeroPosition.EAST;
@@ -116,7 +115,6 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.keyRight = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.keyUp = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keyDown = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        this.keyFire = this.scene.input.mousePointer.addKey(Phaser.Input.mousePointer.K);
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
@@ -137,7 +135,7 @@ export default class Hero extends Phaser.GameObjects.Sprite {
             return;
         }
 
-        if (this.keyFire.isDown && this.heroState != HeroState.ATTACK) {
+        if (this.scene.input.mousePointer.leftButtonDown() && this.heroState != HeroState.ATTACK) {
             let cardinalPosition = HeroPosition[this.heroPosition].charAt(0).toLowerCase();
 
             this.anims.play('hero-atk-' + cardinalPosition + '-anim');
@@ -149,7 +147,7 @@ export default class Hero extends Phaser.GameObjects.Sprite {
             });
         }
 
-        //correct bag images
+        //correct bad images
         if (this.heroState == HeroState.ATTACK && this.heroPosition == HeroPosition.EAST) {
             this.setOrigin(0.25, 0.5);
             (this.body as Phaser.Physics.Arcade.Body).setOffset(2, 16);
