@@ -185,6 +185,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         if (this.enemyState == State.DEAD) {
             return;
         }
+        this.enemyState = State.DEAD;
         if (this.enemyPosition == Position.WEST || this.enemyPosition == Position.SOUTH) {
             this.anims.play('phantom_death-w-anim', true);
         }
