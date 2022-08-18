@@ -30,25 +30,25 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.anims.create({
             key: 'hero-idle-e-anim',
             frames: this.anims.generateFrameNumbers('hero-idle-e-ss', {}),
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1
         });
         this.anims.create({
             key: 'hero-idle-w-anim',
             frames: this.anims.generateFrameNumbers('hero-idle-w-ss', {}),
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1
         });
         this.anims.create({
             key: 'hero-idle-n-anim',
             frames: this.anims.generateFrameNumbers('hero-idle-n-ss', {}),
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1
         });
         this.anims.create({
             key: 'hero-idle-s-anim',
             frames: this.anims.generateFrameNumbers('hero-idle-s-ss', {}),
-            frameRate: 10,
+            frameRate: 5,
             repeat: -1
         });
 
@@ -56,25 +56,25 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.anims.create({
             key: 'hero-walk-e-anim',
             frames: this.anims.generateFrameNumbers('hero-walk-e-ss', {}),
-            frameRate: 10,
+            frameRate: 8,
             repeat: -1
         });
         this.anims.create({
             key: 'hero-walk-w-anim',
             frames: this.anims.generateFrameNumbers('hero-walk-w-ss', {}),
-            frameRate: 10,
+            frameRate: 8,
             repeat: -1
         });
         this.anims.create({
             key: 'hero-walk-n-anim',
             frames: this.anims.generateFrameNumbers('hero-walk-n-ss', {}),
-            frameRate: 10,
+            frameRate: 8,
             repeat: -1
         });
         this.anims.create({
             key: 'hero-walk-s-anim',
             frames: this.anims.generateFrameNumbers('hero-walk-s-ss', {}),
-            frameRate: 10,
+            frameRate: 8,
             repeat: -1
         });
 
@@ -82,25 +82,25 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.anims.create({
             key: 'hero-atk-e-anim',
             frames: this.anims.generateFrameNumbers('hero-atk-e-ss', {}),
-            frameRate: 10,
+            frameRate: 12,
             repeat: 0
         });
         this.anims.create({
             key: 'hero-atk-w-anim',
             frames: this.anims.generateFrameNumbers('hero-atk-w-ss', {}),
-            frameRate: 10,
+            frameRate: 12,
             repeat: 0
         });
         this.anims.create({
             key: 'hero-atk-n-anim',
             frames: this.anims.generateFrameNumbers('hero-atk-n-ss', {}),
-            frameRate: 10,
+            frameRate: 12,
             repeat: 0
         });
         this.anims.create({
             key: 'hero-atk-s-anim',
             frames: this.anims.generateFrameNumbers('hero-atk-s-ss', {}),
-            frameRate: 10,
+            frameRate: 12,
             repeat: 0
         });
 
@@ -116,7 +116,7 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.keyRight = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
         this.keyUp = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
         this.keyDown = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-        this.keyFire = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.K);
+        this.keyFire = this.scene.input.mousePointer.addKey(Phaser.Input.mousePointer.K);
 
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
