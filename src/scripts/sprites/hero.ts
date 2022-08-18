@@ -1,4 +1,5 @@
 import 'phaser';
+import Enemy from './enemy';
 
 enum HeroPosition {
     WEST,
@@ -21,6 +22,8 @@ export default class Hero extends Phaser.GameObjects.Sprite {
 
     heroState: HeroState = HeroState.IDLE;
     heroPosition: HeroPosition = HeroPosition.EAST;
+
+    killedEnemies: Array<Enemy> = [];
 
     constructor(scene, x, y) {
         super(scene, x, y, 'char_idle_left-ss', 0);
@@ -123,7 +126,7 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         (this.body as Phaser.Physics.Arcade.Body).setOffset(2, 0);
         (this.body as Phaser.Physics.Arcade.Body).setCollideWorldBounds(true);
 
-        this.setScale(10);
+        //this.setScale(10);
     }
 
     preUpdate(time, delta) {
@@ -165,7 +168,62 @@ export default class Hero extends Phaser.GameObjects.Sprite {
             (this.body as Phaser.Physics.Arcade.Body).setOffset(18, 0);
         }
 
+        //kill enemy
         if (this.heroState == HeroState.ATTACK) {
+            let enemies;
+            if (this.heroPosition == HeroPosition.NORTH) {
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 11, (this.body as Phaser.Physics.Arcade.Body).top - 45, 35, 45);
+                let rectangle = this.scene.add.rectangle(
+                    (this.body as Phaser.Physics.Arcade.Body).left - 11,
+                    (this.body as Phaser.Physics.Arcade.Body).top - 45,
+                    35,
+                    45,
+                    0xeb6434,
+                    0.5
+                );
+                rectangle.setOrigin(0, 0);
+            }
+            if (this.heroPosition == HeroPosition.SOUTH) {
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 11, (this.body as Phaser.Physics.Arcade.Body).bottom, 35, 45);
+                let rectangle = this.scene.add.rectangle(
+                    (this.body as Phaser.Physics.Arcade.Body).left - 11,
+                    (this.body as Phaser.Physics.Arcade.Body).bottom,
+                    35,
+                    45,
+                    0xeb6434,
+                    0.5
+                );
+                rectangle.setOrigin(0, 0);
+            }
+            if (this.heroPosition == HeroPosition.WEST) {
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).right, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35);
+                let rectangle = this.scene.add.rectangle((this.body as Phaser.Physics.Arcade.Body).right, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35, 0xeb6434, 0.5);
+                rectangle.setOrigin(0, 0);
+            }
+            if (this.heroPosition == HeroPosition.EAST) {
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 45, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35);
+                let rectangle = this.scene.add.rectangle((this.body as Phaser.Physics.Arcade.Body).left - 45, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35, 0xeb6434, 0.5);
+                rectangle.setOrigin(0, 0);
+            }
+
+            for (let enemy of enemies) {
+                if (enemy.gameObject instanceof Enemy) {
+                    enemy.gameObject.freeze();
+                    if (!this.killedEnemies.includes(enemy.gameObject)) {
+                        this.killedEnemies.push(enemy.gameObject);
+                    }
+                }
+            }
+
+            //there is already one listener for returning to IDLE and want KILL to be registered only.once
+            if (this.listenerCount(Phaser.Animations.Events.ANIMATION_COMPLETE) == 1) {
+                this.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+                    for (let enemy of this.killedEnemies) {
+                        enemy.kill();
+                    }
+                    this.killedEnemies = [];
+                });
+            }
             return;
         }
 
@@ -175,24 +233,24 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.setOrigin(0.5, 0.5);
 
         if (this.keyRight.isDown) {
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(175);
+            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(85);
             this.heroState = HeroState.WALK;
             this.heroPosition = HeroPosition.EAST;
         }
 
         if (this.keyLeft.isDown) {
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(-175);
+            (this.body as Phaser.Physics.Arcade.Body).setVelocityX(-85);
             this.heroState = HeroState.WALK;
             this.heroPosition = HeroPosition.WEST;
         }
 
         if (this.keyDown.isDown) {
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityY(175);
+            (this.body as Phaser.Physics.Arcade.Body).setVelocityY(85);
             this.heroState = HeroState.WALK;
             this.heroPosition = HeroPosition.SOUTH;
         }
         if (this.keyUp.isDown) {
-            (this.body as Phaser.Physics.Arcade.Body).setVelocityY(-175);
+            (this.body as Phaser.Physics.Arcade.Body).setVelocityY(-85);
             this.heroState = HeroState.WALK;
             this.heroPosition = HeroPosition.NORTH;
         }
@@ -233,6 +291,14 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         }
 
         // Normalize and scale the velocity so that this.hero can't move faster along a diagonal
-        (this.body as Phaser.Physics.Arcade.Body).velocity.normalize().scale(175);
+        (this.body as Phaser.Physics.Arcade.Body).velocity.normalize().scale(85);
+    }
+
+    kill() {
+        if (this.heroState == HeroState.DEAD) {
+            return;
+        }
+        this.heroState = HeroState.DEAD;
+        this.anims.play('hero-death-anim', true);
     }
 }
