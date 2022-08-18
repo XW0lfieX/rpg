@@ -172,38 +172,52 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         if (this.heroState == HeroState.ATTACK) {
             let enemies;
             if (this.heroPosition == HeroPosition.NORTH) {
-                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 11, (this.body as Phaser.Physics.Arcade.Body).top - 45, 35, 45);
-                let rectangle = this.scene.add.rectangle(
-                    (this.body as Phaser.Physics.Arcade.Body).left - 11,
-                    (this.body as Phaser.Physics.Arcade.Body).top - 45,
-                    35,
-                    45,
-                    0xeb6434,
-                    0.5
-                );
-                rectangle.setOrigin(0, 0);
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 11, (this.body as Phaser.Physics.Arcade.Body).top - 18, 35, 18);
+                // let rectangle = this.scene.add.rectangle(
+                //     (this.body as Phaser.Physics.Arcade.Body).left - 11,
+                //     (this.body as Phaser.Physics.Arcade.Body).top - 18,
+                //     35,
+                //     18,
+                //     0xeb6434,
+                //     0.5
+                // );
+                // rectangle.setOrigin(0, 0);
             }
             if (this.heroPosition == HeroPosition.SOUTH) {
-                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 11, (this.body as Phaser.Physics.Arcade.Body).bottom, 35, 45);
-                let rectangle = this.scene.add.rectangle(
-                    (this.body as Phaser.Physics.Arcade.Body).left - 11,
-                    (this.body as Phaser.Physics.Arcade.Body).bottom,
-                    35,
-                    45,
-                    0xeb6434,
-                    0.5
-                );
-                rectangle.setOrigin(0, 0);
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 11, (this.body as Phaser.Physics.Arcade.Body).bottom, 35, 18);
+                // let rectangle = this.scene.add.rectangle(
+                //     (this.body as Phaser.Physics.Arcade.Body).left - 11,
+                //     (this.body as Phaser.Physics.Arcade.Body).bottom,
+                //     35,
+                //     18,
+                //     0xeb6434,
+                //     0.5
+                // );
+                // rectangle.setOrigin(0, 0);
             }
             if (this.heroPosition == HeroPosition.WEST) {
-                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).right, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35);
-                let rectangle = this.scene.add.rectangle((this.body as Phaser.Physics.Arcade.Body).right, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35, 0xeb6434, 0.5);
-                rectangle.setOrigin(0, 0);
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 18, (this.body as Phaser.Physics.Arcade.Body).top - 10, 18, 35);
+                // let rectangle = this.scene.add.rectangle(
+                //     (this.body as Phaser.Physics.Arcade.Body).left - 18,
+                //     (this.body as Phaser.Physics.Arcade.Body).top - 10,
+                //     18,
+                //     35,
+                //     0xeb6434,
+                //     0.5
+                // );
+                // rectangle.setOrigin(0, 0);
             }
             if (this.heroPosition == HeroPosition.EAST) {
-                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).left - 45, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35);
-                let rectangle = this.scene.add.rectangle((this.body as Phaser.Physics.Arcade.Body).left - 45, (this.body as Phaser.Physics.Arcade.Body).top, 45, 35, 0xeb6434, 0.5);
-                rectangle.setOrigin(0, 0);
+                enemies = this.scene.physics.overlapRect((this.body as Phaser.Physics.Arcade.Body).right, (this.body as Phaser.Physics.Arcade.Body).top - 10, 18, 35);
+                // let rectangle = this.scene.add.rectangle(
+                //     (this.body as Phaser.Physics.Arcade.Body).right,
+                //     (this.body as Phaser.Physics.Arcade.Body).top - 10,
+                //     18,
+                //     35,
+                //     0xeb6434,
+                //     0.5
+                // );
+                // rectangle.setOrigin(0, 0);
             }
 
             for (let enemy of enemies) {

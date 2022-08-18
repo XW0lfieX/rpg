@@ -196,7 +196,8 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
         this.scene.physics.world.removeCollider(this.heroCollider);
         this.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
             this.setActive(false);
+            this.destroy();
         });
-        this.scene.time.delayedCall(30 * 1000, () => this.destroy(), [], this);
+        //this.scene.time.delayedCall(2 * 1000, () => this.destroy(), [], this);
     }
 }
