@@ -158,9 +158,11 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         }
         if (this.heroState == HeroState.ATTACK && this.heroPosition == HeroPosition.NORTH) {
             this.setOrigin(0.5, 0.75);
+            (this.body as Phaser.Physics.Arcade.Body).setOffset(18, 16);
         }
         if (this.heroState == HeroState.ATTACK && this.heroPosition == HeroPosition.SOUTH) {
             this.setOrigin(0.5, 0.25);
+            (this.body as Phaser.Physics.Arcade.Body).setOffset(18, 0);
         }
 
         if (this.heroState == HeroState.ATTACK) {
