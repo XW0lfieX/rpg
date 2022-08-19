@@ -101,7 +101,7 @@ export default class Enemy extends Phaser.GameObjects.Sprite {
 
         if (this.enemyState == State.IDLE) {
             let distanceFromPlayer = Phaser.Math.Distance.Between(this.x, this.y, this.scene.hero.x, this.scene.hero.y);
-            if (distanceFromPlayer <= 300 && !this.target) {
+            if (distanceFromPlayer <= 160 && !this.target) {
                 this.computeNextTarget();
             }
         }
