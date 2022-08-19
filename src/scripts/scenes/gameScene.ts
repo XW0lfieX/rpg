@@ -43,6 +43,7 @@ export default class GameScene extends Scene {
         this.load.tilemapTiledJSON('map', 'assets/maps/maps/mapa.json');
         this.load.image('all_in_one-tiles', 'assets/maps/tilesets/all_in_one.png');
         this.load.image('pixil-frame-tiles', 'assets/maps/tilesets/pixil-frame.png');
+        this.load.image('fullsheet-tiles', 'assets/maps/tilesets/fullsheet.png');
     }
 
     create() {
@@ -53,15 +54,17 @@ export default class GameScene extends Scene {
 
         let tileset = this.map.addTilesetImage('furniture', 'all_in_one-tiles', 16, 16, 0, 0);
         let tileset2 = this.map.addTilesetImage('overworld good', 'pixil-frame-tiles', 16, 16, 0, 0);
+        let tileset3 = this.map.addTilesetImage('barcuta', 'fullsheet-tiles', 16, 16, 0, 0);
 
-        let water = this.map.createLayer('water', [tileset, tileset2], 0, 0);
-        let ground = this.map.createLayer('ground', [tileset, tileset2], 0, 0);
-        let deco = this.map.createLayer('deco', [tileset, tileset2], 0, 0);
-        this.collisionLayer = this.map.createLayer('collision', [tileset, tileset2], 0, 0);
-        let above = this.map.createLayer('above', [tileset, tileset2], 0, 0);
+        let water = this.map.createLayer('water', [tileset, tileset2, tileset3], 0, 0);
+        let ground = this.map.createLayer('ground', [tileset, tileset2, tileset3], 0, 0);
+        let deco = this.map.createLayer('deco', [tileset, tileset2, tileset3], 0, 0);
+        this.collisionLayer = this.map.createLayer('collision', [tileset, tileset2, tileset3], 0, 0);
+        let above = this.map.createLayer('above', [tileset, tileset2, tileset3], 0, 0);
 
         this.collisionLayer.setCollisionBetween(tileset.firstgid, tileset.firstgid + tileset.total, true);
         this.collisionLayer.setCollisionBetween(tileset2.firstgid, tileset2.firstgid + tileset2.total, true);
+        this.collisionLayer.setCollisionBetween(tileset3.firstgid, tileset3.firstgid + tileset3.total, true);
 
         above.setDepth(200);
 
