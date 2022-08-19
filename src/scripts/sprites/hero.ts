@@ -142,7 +142,6 @@ export default class Hero extends Phaser.GameObjects.Sprite {
             let cardinalPosition = HeroPosition[this.heroPosition].charAt(0).toLowerCase();
 
             this.anims.play('hero-atk-' + cardinalPosition + '-anim');
-            console.log(this.anims.getName());
             this.heroState = HeroState.ATTACK;
             this.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
                 this.heroState = HeroState.IDLE;

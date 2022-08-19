@@ -7,6 +7,7 @@ import Enemy from '../sprites/enemy';
 export default class GameScene extends Scene {
     hero: Hero;
     teleportAreas: Array<Phaser.Types.Tilemaps.TiledObject>;
+    teleportPoints: Array<Phaser.Types.Tilemaps.TiledObject>;
     map: Phaser.Tilemaps.Tilemap;
     collisionLayer: Phaser.Tilemaps.TilemapLayer;
     navMeshPlugin: PhaserNavMeshPlugin;
@@ -73,7 +74,13 @@ export default class GameScene extends Scene {
         this.hero = new Hero(this, spawnPoint.x, spawnPoint.y);
         this.hero.setDepth(100);
 
-        this.teleportAreas = this.map.filterObjects('chestii', (obj) => obj.type === 'TELEPORT_AREA');
+        this.teleportAreas = this.map.filterObjects('chestii', (obj) => {
+            if (obj.name == 'enemy') {
+                return false;
+            }
+            return obj.type === 'TELEPORT_AREA';
+        });
+        this.teleportPoints = this.map.filterObjects('chestii', (obj) => obj.prope === 'TELEPORT_TARGET');
 
         let enemyObjects: Phaser.Types.Tilemaps.TiledObject[] = this.map.getObjectLayer('chestii').objects.filter((obj) => obj.name == 'enemy');
         for (let enemyObject of enemyObjects) {
@@ -91,5 +98,21 @@ export default class GameScene extends Scene {
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
     }
 
-    update(time, delta) {}
+    update(time, delta) {
+        for (let area of this.teleportAreas) {
+            let rect = new Phaser.Geom.Rectangle(area.x!, area.y!, area.width!, area.height!);
+            console.log(area.name);
+            if (rect.contains(this.hero.x, this.hero.y)) {
+                console.log(area.name + ' !!!!!!! HERO Detected');
+                let teleportPoint: Phaser.Types.Tilemaps.TiledObject | undefined = this.teleportPoints.find(
+                    (point) => area.properties.find((p) => p.name == 'target').value == point.name
+                );
+                if (teleportPoint) {
+                    this.hero.setPosition(teleportPoint.x, teleportPoint.y);
+                } else {
+                    console.error('Teleport point not found: "target" in area');
+                }
+            }
+        }
+    }
 }

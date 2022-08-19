@@ -1278,15 +1278,95 @@
                 }, 
                 {
                  "class":"",
+                 "height":6.96145048809194,
+                 "id":96,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"target",
+                         "type":"string",
+                         "value":"potatoIsland1"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"TELEPORT_AREA"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":15.1932390086412,
+                 "x":400.40515304023,
+                 "y":312.096568693372
+                }, 
+                {
+                 "class":"",
+                 "height":6.28407393307134,
+                 "id":97,
+                 "name":"",
+                 "properties":[
+                        {
+                         "name":"target",
+                         "type":"string",
+                         "value":"spawnIsland"
+                        }, 
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"TELEPORT_AREA"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":15.1932,
+                 "x":400.421062768388,
+                 "y":1648.56986141813
+                }, 
+                {
+                 "class":"",
                  "height":0,
-                 "id":95,
+                 "id":98,
+                 "name":"potatoIsland1",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"TELEPORT_TARGET"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":411.874162416483,
+                 "y":1675.35985962341
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":99,
+                 "name":"spawnIsland",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"type",
+                         "type":"string",
+                         "value":"TELEPORT_TARGET"
+                        }],
+                 "rotation":0,
+                 "visible":true,
+                 "width":0,
+                 "x":407.634466874407,
+                 "y":286.038477171115
+                }, 
+                {
+                 "class":"",
+                 "height":0,
+                 "id":100,
                  "name":"Spawn Point",
                  "point":true,
                  "rotation":0,
                  "visible":true,
                  "width":0,
-                 "x":1236.66666666667,
-                 "y":828.333333333333
+                 "x":376.548142229325,
+                 "y":246.204554534558
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -1295,7 +1375,7 @@
          "y":0
         }],
  "nextlayerid":8,
- "nextobjectid":96,
+ "nextobjectid":101,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.9.1",
