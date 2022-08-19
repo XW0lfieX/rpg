@@ -78,9 +78,18 @@ export default class GameScene extends Scene {
             if (obj.name == 'enemy') {
                 return false;
             }
-            return obj.type === 'TELEPORT_AREA';
+            if (obj && (obj as any).properties) {
+                return (obj as any).properties.find((p) => p.name == 'type').value === 'TELEPORT_AREA';
+            }
         });
-        this.teleportPoints = this.map.filterObjects('chestii', (obj) => obj.point === 'TELEPORT_TARGET');
+        this.teleportPoints = this.map.filterObjects('chestii', (obj) => {
+            if (obj.name == 'enemy') {
+                return false;
+            }
+            if (obj && (obj as any).properties) {
+                return (obj as any).properties.find((p) => p.name == 'type').value === 'TELEPORT_TARGET';
+            }
+        });
 
         let enemyObjects: Phaser.Types.Tilemaps.TiledObject[] = this.map.getObjectLayer('chestii').objects.filter((obj) => obj.name == 'enemy');
         for (let enemyObject of enemyObjects) {
@@ -101,14 +110,19 @@ export default class GameScene extends Scene {
     update(time, delta) {
         for (let area of this.teleportAreas) {
             let rect = new Phaser.Geom.Rectangle(area.x!, area.y!, area.width!, area.height!);
-            console.log(area.name);
+            //console.log(area.name);
             if (rect.contains(this.hero.x, this.hero.y)) {
                 console.log(area.name + ' !!!!!!! HERO Detected');
-                let teleportPoint: Phaser.Types.Tilemaps.TiledObject | undefined = this.teleportPoints.find(
-                    (point) => area.properties.find((p) => p.name == 'target').value == point.name
-                );
+                let teleportPoint: Phaser.Types.Tilemaps.TiledObject | undefined = this.teleportPoints.find((point) => {
+                    console.log(area.properties.find((p) => p.name == 'target').value);
+                    console.log(point.name);
+                    return area.properties.find((p) => p.name == 'target').value == point.name;
+                });
                 if (teleportPoint) {
-                    this.hero.setPosition(teleportPoint.x, teleportPoint.y);
+                    this.cameras.main.fadeOut(1000, 255, 255, 255, () => {
+                        this.cameras.main.fadeIn(1000);
+                        this.hero.setPosition(teleportPoint!.x, teleportPoint!.y)!;
+                    });
                 } else {
                     console.error('Teleport point not found: "target" in area');
                 }
