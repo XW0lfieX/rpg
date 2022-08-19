@@ -80,7 +80,7 @@ export default class GameScene extends Scene {
             }
             return obj.type === 'TELEPORT_AREA';
         });
-        this.teleportPoints = this.map.filterObjects('chestii', (obj) => obj.prope === 'TELEPORT_TARGET');
+        this.teleportPoints = this.map.filterObjects('chestii', (obj) => obj.point === 'TELEPORT_TARGET');
 
         let enemyObjects: Phaser.Types.Tilemaps.TiledObject[] = this.map.getObjectLayer('chestii').objects.filter((obj) => obj.name == 'enemy');
         for (let enemyObject of enemyObjects) {

@@ -122,8 +122,8 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         this.scene.add.existing(this);
         this.scene.physics.add.existing(this);
 
-        (this.body as Phaser.Physics.Arcade.Body).setSize(10, 14);
-        (this.body as Phaser.Physics.Arcade.Body).setOffset(2, 0);
+        // (this.body as Phaser.Physics.Arcade.Body).setSize(10, 14);
+        // (this.body as Phaser.Physics.Arcade.Body).setOffset(2, 0);
         (this.body as Phaser.Physics.Arcade.Body).setCollideWorldBounds(true);
 
         //this.setScale(10);
@@ -241,8 +241,8 @@ export default class Hero extends Phaser.GameObjects.Sprite {
         }
 
         //non attack
-        (this.body as Phaser.Physics.Arcade.Body).setSize(10, 14);
-        (this.body as Phaser.Physics.Arcade.Body).setOffset(2, 0);
+        (this.body as Phaser.Physics.Arcade.Body).setSize(10, 3);
+        (this.body as Phaser.Physics.Arcade.Body).setOffset(2, 11);
         this.setOrigin(0.5, 0.5);
 
         if (this.keyRight.isDown) {
